@@ -1,8 +1,11 @@
-import 'dart:convert';
-
 import 'city_model.dart';
 import 'phone_model.dart';
 
+import 'package:json_annotation/json_annotation.dart';
+
+part 'address_model.g.dart';
+
+@JsonSerializable()
 class AddressModel {
   final String street;
   final int number;
@@ -55,34 +58,7 @@ class AddressModel {
     );
   }
 
-  String toJson() => json.encode(toMap());
-
-  factory AddressModel.fromJson(String source) =>
-      AddressModel.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'AddressModel(street: $street, number: $number, zipCode: $zipCode, city: $city, phone: $phone)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is AddressModel &&
-        other.street == street &&
-        other.number == number &&
-        other.zipCode == zipCode &&
-        other.city == city &&
-        other.phone == phone;
-  }
-
-  @override
-  int get hashCode {
-    return street.hashCode ^
-        number.hashCode ^
-        zipCode.hashCode ^
-        city.hashCode ^
-        phone.hashCode;
-  }
+  factory AddressModel.fromJson(Map<String, dynamic> json) =>
+      _$AddressModelFromJson(json);
+  Map<String, dynamic> toJson() => _$AddressModelToJson(this);
 }

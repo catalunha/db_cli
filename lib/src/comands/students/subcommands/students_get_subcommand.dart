@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:args/command_runner.dart';
 
-import '../../../repositories/student_dio_repository.dart';
+import '../../../repositories/student_retrofit_repository.dart';
 
 class StudentsGetSubcommand extends Command {
-  final StudentDioRepository studentRepository;
+  final StudentRetrofitRepository studentRepository;
   StudentsGetSubcommand({
     required this.studentRepository,
   });
@@ -19,6 +19,7 @@ class StudentsGetSubcommand extends Command {
   Future<void> run() async {
     print('Aguarde buscando alunos...');
     final students = await studentRepository.get();
+    print(students);
     print('Apresentar também os cursos (s ou n)');
     final showCourses =
         stdin.readLineSync()?.toLowerCase() == 's' ? true : false;

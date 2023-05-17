@@ -7,10 +7,10 @@ import '../../../models/city_model.dart';
 import '../../../models/phone_model.dart';
 import '../../../models/student_model.dart';
 import '../../../repositories/product_dio_repository.dart';
-import '../../../repositories/student_dio_repository.dart';
+import '../../../repositories/student_retrofit_repository.dart';
 
 class StudentsSaveSubcommand extends Command {
-  final StudentDioRepository studentRepository;
+  final StudentRetrofitRepository studentRepository;
   final productRepository = ProductDioRepository();
   StudentsSaveSubcommand({
     required this.studentRepository,
@@ -64,8 +64,11 @@ class StudentsSaveSubcommand extends Command {
               phone:
                   PhoneModel(ddd: int.tryParse(cols[7]) ?? 0, phone: cols[8]),
             ));
-
-        await studentRepository.save(student);
+        if (id == null) {
+          await studentRepository.post(student);
+        } else {
+          await studentRepository.put(student.id.toString(), student);
+        }
         print('Aluno ${cols[0]} inserido com sucesso');
         if (id != null) {
           break;

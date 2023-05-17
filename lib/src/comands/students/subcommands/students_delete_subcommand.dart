@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:args/command_runner.dart';
 
-import '../../../repositories/student_dio_repository.dart';
+import '../../../repositories/student_retrofit_repository.dart';
 
 class StudentsDeleteSubcommand extends Command {
-  final StudentDioRepository studentRepository;
+  final StudentRetrofitRepository studentRepository;
 
   StudentsDeleteSubcommand({
     required this.studentRepository,

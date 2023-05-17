@@ -1,5 +1,8 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'city_model.g.dart';
+
+@JsonSerializable()
 class CityModel {
   final int id;
   final String name;
@@ -33,22 +36,7 @@ class CityModel {
       name: map['name'] ?? '',
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory CityModel.fromJson(String source) =>
-      CityModel.fromMap(json.decode(source));
-
-  @override
-  String toString() => 'CityModel(id: $id, name: $name)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is CityModel && other.id == id && other.name == name;
-  }
-
-  @override
-  int get hashCode => id.hashCode ^ name.hashCode;
+  factory CityModel.fromJson(Map<String, dynamic> json) =>
+      _$CityModelFromJson(json);
+  Map<String, dynamic> toJson() => _$CityModelToJson(this);
 }

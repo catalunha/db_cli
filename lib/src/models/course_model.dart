@@ -1,14 +1,21 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'course_model.g.dart';
+
+@JsonSerializable()
 class CourseModel {
   final int id;
   final String name;
   final bool isStudent;
-  CourseModel({
-    required this.id,
-    required this.name,
-    required this.isStudent,
-  });
+  CourseModel(
+    this.id,
+    this.name,
+    this.isStudent,
+  );
+
+  factory CourseModel.fromJson(Map<String, dynamic> json) =>
+      _$CourseModelFromJson(json);
+  Map<String, dynamic> toJson() => _$CourseModelToJson(this);
 
   CourseModel copyWith({
     int? id,
@@ -16,9 +23,9 @@ class CourseModel {
     bool? isStudent,
   }) {
     return CourseModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      isStudent: isStudent ?? this.isStudent,
+      id ?? this.id,
+      name ?? this.name,
+      isStudent ?? this.isStudent,
     );
   }
 
@@ -34,31 +41,9 @@ class CourseModel {
 
   factory CourseModel.fromMap(Map<String, dynamic> map) {
     return CourseModel(
-      id: map['id']?.toInt() ?? 0,
-      name: map['name'] ?? '',
-      isStudent: map['isStudent'] ?? false,
+      map['id']?.toInt() ?? 0,
+      map['name'] ?? '',
+      map['isStudent'] ?? false,
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory CourseModel.fromJson(String source) =>
-      CourseModel.fromMap(json.decode(source));
-
-  @override
-  String toString() =>
-      'CourseModel(id: $id, name: $name, isStudent: $isStudent)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is CourseModel &&
-        other.id == id &&
-        other.name == name &&
-        other.isStudent == isStudent;
-  }
-
-  @override
-  int get hashCode => id.hashCode ^ name.hashCode ^ isStudent.hashCode;
 }

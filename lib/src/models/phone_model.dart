@@ -1,5 +1,8 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'phone_model.g.dart';
+
+@JsonSerializable()
 class PhoneModel {
   final int ddd;
   final String phone;
@@ -34,21 +37,7 @@ class PhoneModel {
     );
   }
 
-  String toJson() => json.encode(toMap());
-
-  factory PhoneModel.fromJson(String source) =>
-      PhoneModel.fromMap(json.decode(source));
-
-  @override
-  String toString() => 'PhoneModel(ddd: $ddd, phone: $phone)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is PhoneModel && other.ddd == ddd && other.phone == phone;
-  }
-
-  @override
-  int get hashCode => ddd.hashCode ^ phone.hashCode;
+  factory PhoneModel.fromJson(Map<String, dynamic> json) =>
+      _$PhoneModelFromJson(json);
+  Map<String, dynamic> toJson() => _$PhoneModelToJson(this);
 }

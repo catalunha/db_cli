@@ -1,6 +1,7 @@
 import 'package:args/command_runner.dart';
+import 'package:dio/dio.dart';
 
-import '../../repositories/student_dio_repository.dart';
+import '../../repositories/student_retrofit_repository.dart';
 import 'subcommands/students_delete_subcommand.dart';
 import 'subcommands/students_get_id_subcommand.dart';
 import 'subcommands/students_get_subcommand.dart';
@@ -14,7 +15,8 @@ class StudentsCommand extends Command {
 
   StudentsCommand() {
     try {
-      final StudentDioRepository studentRepository = StudentDioRepository();
+      final StudentRetrofitRepository studentRepository =
+          StudentRetrofitRepository(Dio());
       addSubcommand(StudentsGetSubcommand(
         studentRepository: studentRepository,
       ));
