@@ -1,7 +1,10 @@
 import 'package:args/command_runner.dart';
 
 import '../../repositories/student_repository.dart';
+import 'subcommands/students_delete_subcommand.dart';
+import 'subcommands/students_get_id_subcommand.dart';
 import 'subcommands/students_get_subcommand.dart';
+import 'subcommands/students_save_subcommand.dart';
 
 class StudentsCommand extends Command {
   @override
@@ -10,9 +13,22 @@ class StudentsCommand extends Command {
   String get description => 'Students Operations';
 
   StudentsCommand() {
-    final StudentRepository studentRepository = StudentRepository();
-    addSubcommand(StudentsGetSubcommand(
-      studentRepository: studentRepository,
-    ));
+    try {
+      final StudentRepository studentRepository = StudentRepository();
+      addSubcommand(StudentsGetSubcommand(
+        studentRepository: studentRepository,
+      ));
+      addSubcommand(StudentsGetIdSubcommand(
+        studentRepository: studentRepository,
+      ));
+      addSubcommand(StudentsSaveSubcommand(
+        studentRepository: studentRepository,
+      ));
+      addSubcommand(StudentsDeleteSubcommand(
+        studentRepository: studentRepository,
+      ));
+    } catch (e) {
+      print('SubComandos com erro. Veja -h');
+    }
   }
 }
