@@ -1,6 +1,6 @@
 import 'package:args/command_runner.dart';
 
-import '../../repositories/student_repository.dart';
+import '../../repositories/student_dio_repository.dart';
 import 'subcommands/students_delete_subcommand.dart';
 import 'subcommands/students_get_id_subcommand.dart';
 import 'subcommands/students_get_subcommand.dart';
@@ -14,7 +14,7 @@ class StudentsCommand extends Command {
 
   StudentsCommand() {
     try {
-      final StudentRepository studentRepository = StudentRepository();
+      final StudentDioRepository studentRepository = StudentDioRepository();
       addSubcommand(StudentsGetSubcommand(
         studentRepository: studentRepository,
       ));

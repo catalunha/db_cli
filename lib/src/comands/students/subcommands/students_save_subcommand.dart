@@ -6,12 +6,12 @@ import '../../../models/address_model.dart';
 import '../../../models/city_model.dart';
 import '../../../models/phone_model.dart';
 import '../../../models/student_model.dart';
-import '../../../repositories/product_repository.dart';
-import '../../../repositories/student_repository.dart';
+import '../../../repositories/product_dio_repository.dart';
+import '../../../repositories/student_dio_repository.dart';
 
 class StudentsSaveSubcommand extends Command {
-  final StudentRepository studentRepository;
-  final productRepository = ProductRepository();
+  final StudentDioRepository studentRepository;
+  final productRepository = ProductDioRepository();
   StudentsSaveSubcommand({
     required this.studentRepository,
   }) {
